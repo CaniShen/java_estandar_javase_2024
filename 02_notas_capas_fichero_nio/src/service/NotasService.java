@@ -1,8 +1,5 @@
 package service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,7 +28,6 @@ import exceptions.ErrorFuenteDatosException;
 public class NotasService {
 	Path pt = Path.of("notas.txt");
 
-	
 	public void borrarNotas()	{
 		try {
 			Files.deleteIfExists(pt);
