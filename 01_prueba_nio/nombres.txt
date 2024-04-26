@@ -1,0 +1,7 @@
+cadena1
+cadena2
+cadena3
+lunes
+martes
+miercoles
+jueves
