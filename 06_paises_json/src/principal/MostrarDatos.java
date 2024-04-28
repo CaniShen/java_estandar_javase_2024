@@ -6,7 +6,7 @@ public class MostrarDatos {
 
 	public static void main(String[] args) {
 		var paisesService=new PaisesService();
-		paisesService.getContinentes().forEach(System)
+		paisesService.listaContinente().forEach(t-> System.out.println(t));
 
 	}
 
