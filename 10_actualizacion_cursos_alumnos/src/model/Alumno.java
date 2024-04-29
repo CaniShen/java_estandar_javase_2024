@@ -3,14 +3,15 @@ package model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Contacto {
-
-	private int idContacto;
+public class Alumno {
+	private String dni;
 	private String nombre;
-	private String email;
 	private int edad;
-	
+	private double nota;
+	private int idCurso;
+
 }
