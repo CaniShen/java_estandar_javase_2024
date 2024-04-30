@@ -34,7 +34,7 @@ public class AlumnosService {
 		}
 
  }
-private Alumno existeAlumnoPorDni(String dni) {
+public Alumno existeAlumnoPorDni(String dni) {
 	try (Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);)  {
 		String sql="select * from alumnos where dni=?";
 		PreparedStatement st=con.prepareStatement(sql);

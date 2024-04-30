@@ -14,7 +14,7 @@ public class CursosService {
 	String password="root";
 
 public boolean nuevoCurso(Curso curso) {
-	if(existeCursoPorId)(curso.getIdCurso()!=null)  {
+	if(existeCursoPorId(curso.getIdCurso())!=null)  {
 		return false;
 	}
 	try(Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);)  {
@@ -24,7 +24,6 @@ public boolean nuevoCurso(Curso curso) {
 		ps.setString(2, curso.getCurso());
 		ps.setInt(3,curso.getDuracion());
 		ps.setDouble(4,curso.getPrecio());
-		ps.setAlumno(5,curso.getAlumnos());
 		ps.execute();
 		return true;
 	} catch (SQLException ex) {
@@ -33,7 +32,7 @@ public boolean nuevoCurso(Curso curso) {
 	}
 }
 
-private Curso existeCursoPorId(int idCurso) {
+public Curso existeCursoPorId(int idCurso) {
 	try (Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);)  {
 		String sql="select * from contactos where idCurso=?";
 		PreparedStatement st=con.prepareStatement(sql);
@@ -46,7 +45,7 @@ private Curso existeCursoPorId(int idCurso) {
 					rs.getString("curso"),
 					rs.getInt("duracion"),
 					rs.getDouble("precio"),
-					rs.getAlumno("alumnos"));
+					(null));
 		}
 			return null;
 		
