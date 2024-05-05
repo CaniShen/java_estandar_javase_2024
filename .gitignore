@@ -1,4 +1,4 @@
-.project
+*.project
 .classpath
 .settings
 .factorypath
@@ -6,4 +6,3 @@
 target/
 #comment
 /.metadata/
-/.classpath
