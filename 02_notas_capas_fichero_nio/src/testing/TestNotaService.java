@@ -1,14 +1,16 @@
 package testing;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import exceptions.ErrorFuenteDatosException;
 import service.NotasService;
 
 
 class TestNotaService {
-	//
 	static NotasService service= new NotasService();
 	@BeforeAll ///ANOTACIONES--INDICACIONES meta datos.información
 	static void setUpBeforeClass() throws Exception {
@@ -22,22 +24,22 @@ class TestNotaService {
 	
 
 	@Test
-	void testMedia() {
+	void testMedia() throws ErrorFuenteDatosException {
 		assertEquals(5.0, service.media());
 	}
 
 	@Test
-	void testMax() {
+	void testMax() throws ErrorFuenteDatosException {
 		assertEquals(8.0, service.max());
 	}
 
 	@Test
-	void testMin() {
+	void testMin() throws ErrorFuenteDatosException {
 		assertEquals(1.0, service.min());
 	}
 
 	@Test
-	void testObtenerNotas() {
+	void testObtenerNotas() throws ErrorFuenteDatosException {
 //		assertEquals(4, service.obtenerNotas());
 //		assertArrayEquals(new Double[]ArrayList<> (5.0,8.0,1.0,6.0),service.obtenerNotas());
 		assertEquals(4,service.obtenerNotas().size());

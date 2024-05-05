@@ -97,6 +97,7 @@ public class NotasMenu {
 		} catch (ErrorFuenteDatosException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Hubo un error a leer las notas");
+			System.out.println(e.getMessage());
 		}
 
 	}
