@@ -6,3 +6,4 @@
 target/
 #comment
 /.metadata/
+*.classpath
