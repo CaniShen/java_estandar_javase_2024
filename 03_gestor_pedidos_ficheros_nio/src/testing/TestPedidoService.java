@@ -39,7 +39,7 @@ class TestPedidoService {
 	void testPedidoEntreFechas() {
 		LocalDate fmin=LocalDate.of(2022, 1, 1);
 		LocalDate fmax=LocalDate.of(2022,12,31);
-		assertEquals(2,service.pedidoEntreFechas(fmin, fmax).size());
+		assertEquals(2,service.pedidosEntreFechas(fmin, fmax).size());
 	}
 
 }
