@@ -70,8 +70,9 @@ public class DatosProvinciasService {
 				.filter(p->p.getComunidadAutonoma().equals(comunidad))
 				.toList();
 	}
-	public List<Municipio> municipiosComunidad(String codigoProvincia){
-		return getStreamMunicipiosProvincia(codigoProvincia)
+	public List<Municipio> municipios(){
+		return getStreamProvincias()//Stream<Provincia>
+				.flatMap(p->getStreamMunicipiosProvincia(p.getCodigo()))//Stream<Municipio>
 				.toList();
 	}
 }
