@@ -7,37 +7,68 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import dao.ComunidadesDao;
+import dao.MunicipiosDao;
+import dao.ProvinciasDao;
 import model.Comunidad;
 import model.Municipio;
 import model.Provincia;
 
 public class ComunidadesServiceImpl implements ComunidadesService {
-	String cadenaConexion="jdbc:mysql://localhost:3306/comunidades";
-	String usuario="root";
-	String password="root";
+	
+		ComunidadesDao comunidadesDao;
+		MunicipiosDao municipiosDao;
+		ProvinciasDao provinciasDao;
+		
+		public ComunidadesServiceImpl() {
+			comunidadesDao = ComunidadesDao.of();
+			municipiosDao = MunicipiosDao.of();
+			provinciasDao = ProvinciasDao.of();
+			
+		}
 	
 	@Override
-	public void saveComunidades(List<Comunidad>  comunidades)  {
-		try(Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){
-			String sql="insert into comunidades(codigo,nombre) value(?,?)";
-			PreparedStatement ps=con.prepareStatement(sql);
-			for(Comunidad c:comunidades) {
-				ps.setString(1,c.getCodigo());
-				ps.setString(2,c.getNombre());
-				ps.execute();
-		}
-		
-	}
-	catch(SQLException ex) {
-		ex.printStackTrace();
-	}
-}
-	public void saveComunidades(Comunidad comunidad)  {
-		//pendiente
-	}
+	public int saveComunidades(List<Comunidad> comunidades)  {
+		int i=0;
+		for(Comunidad comunidad:comunidades) {
+			if (comunidadesDao.findByComunidad(comunidad.getNombre()) ==null) {
+				comunidadesDao.save(comunidad);
+				i++;
+			}
 	
-	public boolean existeComunidad(int codigo)  {
-		//pendiente
+		}
+		return i;
+	}
+
+	@Override
+	public int saveProvincias(List<Provincia> provincias) {
+		int i=0;
+		for(Provincia provincia:provincias) {
+			if (provinciasDao.findByName(provincia.getNombre()) ==null) {
+				provinciasDao.save(provincia);
+				i++;
+			}
+	
+		}
+		return i;
+	}
+
+	@Override
+	public int saveMunicipios(List<Municipio> municipios) {
+		int i=0;
+		for(Municipio municipio:municipios) {
+			if (municipiosDao.findByName(municipio.getNombre()) ==null) {
+				municipiosDao.save(municipio);
+				i++;
+			}
+	
+		}
+		return i;
+	}
+
+	
+/*	public boolean existeComunidad(int codigo)  {
+		if (comunidadesDao.findByComunidad(codigo!))
 		return false;
 	}
 	public void borrarComunidades()  {
@@ -110,7 +141,7 @@ public class ComunidadesServiceImpl implements ComunidadesService {
 			return 0;
 		}
 	
-}
+}*/
 	
 	
 	
