@@ -25,6 +25,7 @@ public class ComunidadesService {
 				ps.setString(2,c.getNombre());
 				ps.execute();
 		}
+			con.commit();
 		
 	}
 	catch(SQLException ex) {
@@ -54,7 +55,6 @@ public class ComunidadesService {
 		try (Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){
 			String sql="insert into provincias(codigo,nombre,codComunidad) values(?,?,?)";
 			PreparedStatement ps=con.prepareStatement(sql);
-			con.setAutoCommit(false);//cancalemos autocomit
 			for(Provincia p:provincias){
 				ps.setString(1, p.getCodigo());
 				ps.setString(2, p.getNombre());

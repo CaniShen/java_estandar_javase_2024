@@ -12,41 +12,70 @@ import model.Comunidad;
 public class ComunidadesDaoImpl implements ComunidadesDao {
 
 	@Override
-	public void save(Comunidad comunidad) {
-		try(Connection con=LocatorConnection.getConnection()) {
-			String sql="insert into comunidades(codigo,nombre) value(?,?)"; 
-			PreparedStatement ps=con.prepareStatement(sql);
-			 
-				ps.setString(1, comunidad.getCodigo());
-				ps.setNString(2, comunidad.getNombre());
-				ps.execute();//ejecutarla sentencia SQL.
-			
-		}
-		catch(SQLException ex) {
+	/*
+	 * public void save(Comunidad comunidad) { try(Connection
+	 * con=LocatorConnection.getConnection()) { String
+	 * sql="insert into comunidades(codigo,nombre) value(?,?)"; PreparedStatement
+	 * ps=con.prepareStatement(sql); ps.setString(1, comunidad.getCodigo());
+	 * ps.setNString(2, comunidad.getNombre()); ps.execute();//ejecutarla sentencia
+	 * SQL.
+	 * 
+	 * } catch(SQLException ex) { ex.printStackTrace(); }
+	 * 
+	 * }
+	 */
+	public void save(List<Comunidad> comunidades) {
+		try (Connection con = LocatorConnection.getConnection();) {
+			String sql = "insert into comunidades(codigo,nombre) values(?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			con.setAutoCommit(false);// cancelamos autocommit
+			for (Comunidad c : comunidades) {
+				ps.setString(1, c.getCodigo());
+				ps.setString(2, c.getNombre());
+				ps.execute();
+			}
+			con.commit();
+		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 
 	}
-	
-	public Comunidad findByComunidad(String nombreComunidad) {
-		try(Connection con=LocatorConnection.getConnection()) {
-			String sql="select * from comunidades where nombre=?";
-			PreparedStatement ps=con.prepareStatement(sql);
-			ps.setString(1, nombreComunidad);
-			ResultSet rs=ps.executeQuery();
-			if(rs.next()) {
-				return new Comunidad(rs.getString("codigo"),
-						rs.getString("nombre"));
-						
-			}
-			return null;
-		}
-		catch(SQLException ex) {
+
+	/*
+	 * public Comunidad findByComunidad(String nombreComunidad) { 
+	 * 		try(Connection con=LocatorConnection.getConnection();) { 
+	 * 			String sql="select * from comunidades where nombre=?"; 
+	 * 				PreparedStatement ps=con.prepareStatement(sql); ps.setString(1, nombreComunidad); ResultSet
+	 * 			rs=ps.executeQuery(); if(rs.next()) { return new
+	 * 			Comunidad(rs.getString("codigo"), rs.getString("nombre"));
+	 * 
+	 * } 		
+	 * 			return null; 
+	 * } catch(SQLException ex) { 
+	 * 			ex.printStackTrace();
+	 * 
+	 * 		} return null; 
+	 * }
+	 */
+	@Override
+	public boolean existComunidad(String codigo) {
+		try (Connection con = LocatorConnection.getConnection();) {
+			String sql = "select * from comunidades where codigo=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, codigo);
+			ResultSet rs = ps.executeQuery();
+			return rs.next();
+		} catch (SQLException ex) {
 			ex.printStackTrace();
-			
-			
+			return false;
 		}
-		return null;
+
+	}
+
+	@Override
+	public void save(Comunidad comunidad) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

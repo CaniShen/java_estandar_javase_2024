@@ -20,12 +20,15 @@ public interface MunicipiosDao {
 	//	.....
 
 	public void save(Municipio municipio);
+//	void saveMunicipios(List<Municipio> municipios);
 	
 	public Municipio findByName(String nombre);
+	
+//	List<String> findCodigo();
 
 	static MunicipiosDao of() {
 		
-		return new MunicipiosDaoImp();
+		return new MunicipiosDaoImpl();
 	}
 	
 	

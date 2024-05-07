@@ -10,7 +10,7 @@ import locator.LocatorConnection;
 import model.Comunidad;
 import model.Municipio;
 
-public class MunicipiosDaoImp implements MunicipiosDao{
+public class MunicipiosDaoImpl implements MunicipiosDao{
 
 	@Override
 	public void save(Municipio municipio) {
@@ -34,7 +34,27 @@ public class MunicipiosDaoImp implements MunicipiosDao{
 		}
 
 	}
-	
+/*	public void saveMunicipios(List<Municipio> municipios) {
+		try(Connection con=LocatorConnection.getConnection()) {
+			String sql="insert into municipios"
+					+ "(codigo,nombre,codProvincia,poblacion,altitud,superficie)"
+					+ " value(?,?,?,?,?,?)"; 
+			PreparedStatement ps=con.prepareStatement(sql);
+			 
+				ps.setString(1, municipio.getCodigo());
+				ps.setString(2, municipio.getNombre());
+				ps.setString(3, municipio.getCodProvincia());
+				ps.setInt(4, municipio.getPoblacion());
+				ps.setInt(5, municipio.getAltitud());
+				ps.setDouble(6, municipio.getSuperficie());
+				ps.execute();//ejecutarla sentencia SQL.
+			
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+	*/
 
 	@Override
 	public Municipio findByName(String nombre) {
@@ -62,5 +82,6 @@ public class MunicipiosDaoImp implements MunicipiosDao{
 		}
 		return null;
 	}
+
 
 }
