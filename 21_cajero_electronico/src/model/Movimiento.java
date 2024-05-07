@@ -1,6 +1,9 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class Movimiento {
 	private int idMovimiento;
-	private String idCuenta;
-	private LocalDate fecha;
+	private int idCuenta;
+	private LocalDateTime fecha;
 	private double cantidad;
 	private String operacion;
 

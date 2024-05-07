@@ -9,4 +9,9 @@ public interface ClientesDao {
 	
 	List<Cliente> findByCuenta(int idCuenta);
 
+	static ClientesDao of() {
+		
+		return new ClientesDaoImpl();
+	}
+
 }

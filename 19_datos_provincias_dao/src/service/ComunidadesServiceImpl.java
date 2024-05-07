@@ -89,7 +89,8 @@ public class ComunidadesServiceImpl implements ComunidadesService {
 	}
 
 	/*
-	 * public boolean existeComunidad(int codigo) { if
+	 * public boolean existeComunidad(int codigo) { 
+	 * if
 	 * (comunidadesDao.findByComunidad(codigo!)) return false; } public void
 	 * borrarComunidades() { try(Connection
 	 * con=DriverManager.getConnection(cadenaConexion,usuario,password);){ String
