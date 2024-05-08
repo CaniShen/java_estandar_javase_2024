@@ -36,6 +36,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			String sql = "UPDATE cuentas SET saldo = ? WHERE numeroCuenta = ?";
 			PreparedStatement st=con.prepareStatement(sql);
 			st.setDouble(1, nuevaSaldo);
+			st.setInt(2, idCuenta);
 			st.execute();
 			
 	}catch (SQLException ex) {

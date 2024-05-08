@@ -17,11 +17,11 @@ public class ClientesDaoImpl implements ClientesDao {
 		List<Cliente> lista=new ArrayList<Cliente>();
 		try(Connection con=LocatorConnection.getConnection();) {
 			String sql="select c.* from clientes c, titulares t where t.idCuenta = ? and t.idCliente = c.dni ";
-			PreparedStatement ps = con.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql); //ejecutar la consulta de SQL
 			ps.setInt(1, idCuenta);
 			ResultSet rs =ps.executeQuery();
 			while(rs.next()) {
-				lista.add(new Cliente(rs.getString("dni"),
+				lista.add(new Cliente(rs.getInt("dni"),
 						rs.getString("nombre"),
 						rs.getString("direccion"),
 						rs.getString("telefono")));

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class Cliente {
-	private String dni;
+	private int dni;
 	private String nombre;
 	private String direccion;
 	private String telefono;

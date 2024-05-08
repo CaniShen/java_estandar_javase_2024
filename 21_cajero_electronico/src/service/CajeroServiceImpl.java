@@ -1,5 +1,6 @@
 package service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import dao.ClientesDao;
@@ -22,19 +23,16 @@ public class CajeroServiceImpl implements CajeroService {
 
 	@Override
 	public Cuenta obtenerCuenta(int idCuenta) {
-		Cuenta cuenta= cuentasDao.findById(idCuenta);
-		if (cuentasDao.findById(idCuenta) != null) {
-			return cuenta;
-		}
-		return null;
+	
+		return cuentasDao.findById(idCuenta);
 	}
 
 	@Override
 	public Cuenta extraccion(int idCuenta, double cantidad) {
 		Cuenta cuenta = cuentasDao.findById(idCuenta);
 		if (cuenta != null && cuenta.getSaldo() >= cantidad) {
-
 			cuentasDao.updateSaldo(idCuenta, cuenta.getSaldo() - cantidad);
+			movimientosDao.save(new Movimiento(0,idCuenta,LocalDateTime.now(),cantidad,"extracción"));
 			cuenta.setSaldo(cuenta.getSaldo()-cantidad);
 			return cuenta;
 		}
@@ -46,6 +44,7 @@ public class CajeroServiceImpl implements CajeroService {
 		Cuenta cuenta=cuentasDao.findById(idCuenta);
 		if (cuenta !=null) {
 			cuentasDao.updateSaldo(idCuenta, cuenta.getSaldo() + cantidad);
+			movimientosDao.save(new Movimiento(0,idCuenta,LocalDateTime.now(),cantidad,"ingreso"));
 			cuenta.setSaldo(cuenta.getSaldo()+cantidad);
 			return cuenta;
 		}
@@ -53,20 +52,32 @@ public class CajeroServiceImpl implements CajeroService {
 	}
 
 	@Override
-	public boolean transferencia(int idCuentaOrigen, int idCuentaDestino, double cantidad) {
+	/*public boolean transferencia(int idCuentaOrigen, int idCuentaDestino, double cantidad) {
 		Cuenta cuentaOri=cuentasDao.findById(idCuentaOrigen);
 		Cuenta cuentaDes=cuentasDao.findById(idCuentaDestino);
 		if(cuentaOri !=null&&cuentaOri.getSaldo()>=cantidad
 				&&cuentaDes !=null) {
 			cuentasDao.updateSaldo(idCuentaDestino, cuentaDes.getSaldo() + cantidad);
 			cuentasDao.updateSaldo(idCuentaOrigen, cuentaDes.getSaldo() - cantidad);
+			movimientosDao.save(new Movimiento(0,idCuentaDestino,LocalDateTime.now(),cantidad,"ingreso"));
+			movimientosDao.save(new Movimiento(0,idCuentaOrigen,LocalDateTime.now(),cantidad,"extracción"));
 			cuentaOri.setSaldo(cuentaOri.getSaldo() - cantidad);
 			cuentaDes.setSaldo(cuentaDes.getSaldo() + cantidad);
 			return true;
 		}
 			return false;
+		}*/
+	public boolean transferencia(int idCuentaOrigen, int idCuentaDestino, double cantidad) {
+		if(cuentasDao.findById(idCuentaOrigen)==null || 
+				cuentasDao.findById(idCuentaDestino)==null ||
+				cantidad>cuentasDao.findById(idCuentaOrigen).getSaldo()) {
+			return false;
+		}else {
+			extraccion(idCuentaOrigen, cantidad);
+			ingreso(idCuentaDestino, cantidad);
+			return true;
 		}
-
+	} 
 	@Override
 	public List<Cliente> obtenerTitulares(int idCuenta) {
 		
@@ -83,7 +94,7 @@ public class CajeroServiceImpl implements CajeroService {
 	public double obtenerSaldo(int idCuenta) {
 		Cuenta cuenta=cuentasDao.findById(idCuenta);
 		
-		return cuenta.getSaldo();
+		return cuenta!=null?cuenta.getSaldo():0;
 	}
 
 }

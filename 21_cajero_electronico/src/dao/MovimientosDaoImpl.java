@@ -37,18 +37,18 @@ public class MovimientosDaoImpl implements MovimientosDao {
 
 	@Override
 	public void save(Movimiento movimiento) {
-		try (Connection con = LocatorConnection.getConnection();) {
-			String sql = "insert into movimiento(idMovimiento,idCuenta,fecha,"
-					+ "cantidad,operacion)  value(?,?,?,?,?)";
+		try (Connection con = LocatorConnection.getConnection()) {
+			String sql = "insert into movimiento(idCuenta,fecha,"
+					+ "cantidad,operacion)  value(?,?,?,?)";
 			// crear objeto para ejecutar una consulta SQL
 			PreparedStatement ps = con.prepareStatement(sql);
 			// establecer los valores de los parámetros en una consulta SQL preparada antes
 			// de ejecutarla.
-			ps.setInt(1, movimiento.getIdMovimiento());
-			ps.setInt(2, movimiento.getIdCuenta());
-			ps.setTimestamp(3, Timestamp.valueOf(movimiento.getFecha()));
-			ps.setDouble(4, movimiento.getCantidad());
-			ps.setString(5, movimiento.getOperacion());
+			
+			ps.setInt(1, movimiento.getIdCuenta());
+			ps.setTimestamp(2, Timestamp.valueOf(movimiento.getFecha()));
+			ps.setDouble(3, movimiento.getCantidad());
+			ps.setString(4, movimiento.getOperacion());
 			ps.execute();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
