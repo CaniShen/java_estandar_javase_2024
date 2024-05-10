@@ -2,15 +2,20 @@ package dao;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import model.Pedido;
+import serializacion.DeserializadorFecha;
 
 public class TiendasDaoImpl implements TiendasDao {
 
@@ -31,6 +36,12 @@ public class TiendasDaoImpl implements TiendasDao {
 	public List<Pedido> getPedidos(String ruta) {
 		return pedidosFichero(ruta).
 				toList();
+	}
+
+	@Override
+	public List<Pedido> getPedido(String ruta) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
