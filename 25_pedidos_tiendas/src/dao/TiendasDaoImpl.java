@@ -26,7 +26,8 @@ public class TiendasDaoImpl implements TiendasDao {
 		try (FileReader reader = new FileReader(ruta);) {//Read fichero
 			Pedido[] pedidos = gson.fromJson(reader, Pedido[].class);//transforma desdeJson a Pedido[]
 			return Arrays.stream(pedidos); //trasforma desde Array a Stream
-		} catch (IOException ex) {
+		} 
+		catch (IOException ex) {
 			ex.printStackTrace();
 			return Stream.empty();
 		}
@@ -38,10 +39,5 @@ public class TiendasDaoImpl implements TiendasDao {
 				toList();
 	}
 
-	@Override
-	public List<Pedido> getPedido(String ruta) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

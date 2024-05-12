@@ -5,7 +5,7 @@ import model.Pedido;
 public interface PedidosDao {
 	void save (Pedido pedido);
 
-	static PedidosDao of() {
+/*	static PedidosDao of() {
 		return new PedidosDaoImpl();
-	}
+	}*/
 }

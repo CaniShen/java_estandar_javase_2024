@@ -1,4 +1,6 @@
-package recursos;
+package tareas;
+
+import recursos.Recurso;
 
 public class HiloConsumidor implements Runnable {
 	private Recurso recurso;

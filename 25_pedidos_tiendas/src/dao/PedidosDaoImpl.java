@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import locator.LocatorConnection;
@@ -18,10 +19,9 @@ public class PedidosDaoImpl implements PedidosDao {
 			try (Connection con = LocatorConnection.getConnection()) {
 				String sql = "insert into pedidos(producto,tienda,fechaPedido,precio) values(?,?,?,?)";
 				PreparedStatement ps = con.prepareStatement(sql);
-			
 				ps.setString(1, pedido.getProducto());
 				ps.setString(2, pedido.getTienda());
-				ps.setTimestamp(3, Timestamp.valueOf(pedido.getFechaPedido()));//	ps.setTimestamp(4, Timestamp.valueOf(pedido.getFechaPedido()));
+				ps.setDate(3, Date.valueOf(pedido.getFechaPedido()));
 				ps.setDouble(4, pedido.getPrecio());
 				ps.execute();
 			

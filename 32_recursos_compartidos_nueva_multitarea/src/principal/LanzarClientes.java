@@ -6,6 +6,7 @@ public class LanzarClientes {
 
 	public static void main(String[] args) {
 		Contador cont=new Contador();
+		//ejecutamos mil tareas cuya misión sea simplemente incrementar el contador
 		for(int i=1;i<=1000;i++) {
 			new Thread(()->cont.incrementar()).start();
 		}

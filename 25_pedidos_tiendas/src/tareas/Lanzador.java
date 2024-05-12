@@ -3,6 +3,7 @@ package tareas;
 import java.io.IOException;
 
 import service.PedidosService;
+import service.PedidosServiceFactory;
 
 public class Lanzador {
 	static String ruta1="C:\\temp\\pedidos\\tienda1.json";
@@ -10,12 +11,31 @@ public class Lanzador {
 	static String ruta3="C:\\temp\\pedidos\\tienda3.json";
 	public static void main(String[] args) throws IOException {
 		PedidosService service=PedidosServiceFactory.getPedidosService();
-		new Thread(()->service.guardarPedido(service.pedidosTienda(ruta1,"tienda1"))).start();
-		new Thread(()->service.guardarPedido(service.pedidosTienda(ruta1,"tienda2"))).start();
-		new Thread(()->service.guardarPedido(service.pedidosTienda(ruta1,"tienda3"))).start();
-		System.out.println("Pedidos enviado. Pulse tecla para continuar");
+		new Thread(()->service.procesarPedidos(ruta1, "tienda1")).start();
+		new Thread(()->service.procesarPedidos(ruta2, "tienda2")).start();
+		new Thread(()->service.procesarPedidos(ruta3, "tienda3")).start();
+		/*new Thread(new TareaPedido(ruta1,"tienda1")).start();
+		new Thread(new TareaPedido(ruta2,"tienda2")).start();
+		new Thread(new TareaPedido(ruta3,"tienda3")).start();*/
+		System.out.println("Pedidos enviados. Pulse tecla para continuar");
 		System.in.read();
-
 	}
 
 }
+/*class TareaPedido implements Runnable{
+private String ruta;
+private String tienda;
+
+public TareaPedido(String ruta, String tienda) {
+	super();
+	this.ruta = ruta;
+	this.tienda = tienda;
+}
+
+@Override
+public void run() {
+	PedidosService service=PedidosServiceFactory.getPedidosService();
+	service.guardarPedidos(service.pedidosTienda(ruta, tienda));		
+}
+
+}*/

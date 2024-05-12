@@ -1,7 +1,7 @@
 package principal;
 
-import recursos.HiloConsumidor;
 import recursos.Recurso;
+import tareas.HiloConsumidor;
 import tareas.HiloProductor;
 
 public class Lanzador {
