@@ -25,12 +25,10 @@ public class JCalculadora extends JFrame {
 		JTextField jtf2=new JTextField();
 		JButton jbtSumar=new JButton("Sumar");
 		JButton jbtMultiplicar=new JButton("Multiplicar");
-		
-		jl1.setBounds(150,50,130,40);
+		jl1.setBounds(150, 50, 130, 40);
 		jtf1.setBounds(280,50,100,40);
-		jl2.setBounds(150,130,130,40);
+		jl2.setBounds(150, 130, 130, 40);
 		jtf2.setBounds(280,130,100,40);
-		
 		jbtSumar.setBounds(120, 220, 150, 50);
 		jbtMultiplicar.setBounds(360, 220, 150, 50);
 		jlResultado.setBounds(150, 270, 150, 30);
@@ -38,6 +36,15 @@ public class JCalculadora extends JFrame {
 		this.add(jl1);this.add(jl2);this.add(jtf1);
 		this.add(jtf2);this.add(jbtSumar);this.add(jbtMultiplicar); 
 		this.add(jlResultado);
+		//evento
+		jbtSumar.addActionListener(e->{
+			int suma=Integer.parseInt(jtf1.getText())+Integer.parseInt(jtf2.getText());
+			jlResultado.setText("Suma: "+suma);
+		});
+		jbtMultiplicar.addActionListener(e->{
+			int multi=Integer.parseInt(jtf1.getText())*Integer.parseInt(jtf2.getText());
+		});
+		
 	}
 	
 	
