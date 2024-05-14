@@ -13,7 +13,7 @@ public class ClientesDaoImpl implements ClientesDao {
 	@Override
 	public Cliente findByUsuario(String usuario) {
 		try(Connection con=LocatorConnection.getConnection()) {
-			String sql="select from clientes where usuario=?";
+			String sql="select * from clientes where usuario=?";
 			//sustituir parámetros para valoros.
 			PreparedStatement st=con.prepareStatement(sql);
 			st.setString(1, usuario);
@@ -21,7 +21,7 @@ public class ClientesDaoImpl implements ClientesDao {
 			//debemos movernos a la primera y única fila, para poder extraer
 			//el valor de dicha fila
 			if(rs.next()) {
-				return new Cliente(rs.getInt("idContacto"),
+				return new Cliente(rs.getInt("idCliente"),
 							rs.getString("usuario"),
 							rs.getString("password"),
 							rs.getString("email"),

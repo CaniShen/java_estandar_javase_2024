@@ -20,6 +20,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JSplitPane;
 
 public class VentanaAutenticar extends JFrame {
 
@@ -34,18 +36,6 @@ public class VentanaAutenticar extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaAutenticar frame = new VentanaAutenticar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -59,77 +49,67 @@ public class VentanaAutenticar extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Usuario: ");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(40, 11, 89, 20);
-		contentPane.add(lblNewLabel_1);
-		
-		jtfPassword = new JTextField();
-		jtfPassword.setBounds(204, 43, 86, 20);
-		contentPane.add(jtfPassword);
-		jtfPassword.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Contraseña: ");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(40, 42, 89, 18);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblNewLabel = new JLabel("Usuario:");
+		lblNewLabel.setBounds(118, 34, 64, 14);
+		contentPane.add(lblNewLabel);
 		
 		jtfUsuario = new JTextField();
-		jtfUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		jtfUsuario.setBounds(204, 13, 86, 20);
+		jtfUsuario.setBounds(192, 31, 86, 20);
 		contentPane.add(jtfUsuario);
 		jtfUsuario.setColumns(10);
 		
-		jbtRegistrar = new JButton("Registrar");
-		jbtRegistrar.addActionListener(new ActionListener() {
+		JLabel lblNewLabel_1 = new JLabel("Password:");
+		lblNewLabel_1.setBounds(118, 88, 64, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		jtfPassword = new JTextField();
+		jtfPassword.setColumns(10);
+		jtfPassword.setBounds(192, 85, 86, 20);
+		contentPane.add(jtfPassword);
+		
+		JButton jbtAutenticar = new JButton("Autenticar");
+		jbtAutenticar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cliente aux=new Cliente();
-				aux.setContraseña(jtfPassword);
-				aux.setUsuario(jtfUsuario);
-				aux.setUsuario(jtfUsuario);
-				aux.setUsuario(jtfUsuario);
-				
+				String mensaje;
 				String usuario=jtfUsuario.getText();
-				String contraseña= jtfPassword.getText();
-				String email=jtfEmail.getText();
-				int telefono=Integer.parseInt(jtfTelefono.getText());
+				String password=jtfPassword.getText();
 				ClientesService service=ClientesServiceFactory.getClientesService();
-				if(service.registrar(cliente)==(true)) {
-					mensaje="Registrado!! ";
-					
+				if(service.autenticar(usuario, password)) {
+					mensaje="Autenticado!";
 				}else {
-					mensaje="El usuario ya existe!";
+					mensaje="Usuario o contraseña no válidos!";
 				}
 				JOptionPane.showMessageDialog(VentanaAutenticar.this, mensaje);
+				
 			}
-			
 		});
-		jbtRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		jbtRegistrar.setBounds(117, 166, 155, 44);
-		contentPane.add(jbtRegistrar);
+		jbtAutenticar.setBounds(156, 133, 112, 23);
+		contentPane.add(jbtAutenticar);
 		
-		JLabel lblNewLabel_3 = new JLabel("E-mail:");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_3.setBounds(40, 75, 79, 20);
-		contentPane.add(lblNewLabel_3);
-		
-		jtfEmail = new JTextField();
-		jtfEmail.setBounds(204, 74, 86, 20);
-		contentPane.add(jtfEmail);
-		jtfEmail.setColumns(10);
-		
-		JLabel lblNewLabel_4 = new JLabel("Telef:");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_4.setBounds(40, 114, 56, 18);
-		contentPane.add(lblNewLabel_4);
-		
-		jtfTelefono = new JTextField();
-		jtfTelefono.setBounds(204, 115, 86, 20);
-		contentPane.add(jtfTelefono);
-		jtfTelefono.setColumns(10);
+		JButton jptRegistrar = new JButton("Registrar");
+		jptRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				VentanaRegistrar frame = new VentanaRegistrar();
+				frame.setVisible(true);
+
+			}
+		});
+		jptRegistrar.setBounds(266, 190, 89, 23);
+		contentPane.add(jptRegistrar);
 	}
+	
+	
+
+public static void main(String[] args) {
+	EventQueue.invokeLater(new Runnable() {
+		public void run() {
+			try {
+				VentanaAutenticar frame = new VentanaAutenticar();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	});
+}
 }
