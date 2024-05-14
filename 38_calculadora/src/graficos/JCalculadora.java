@@ -1,8 +1,12 @@
 package graficos;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class JCalculadora extends JFrame {
@@ -44,6 +48,41 @@ public class JCalculadora extends JFrame {
 		jbtMultiplicar.addActionListener(e->{
 			int multi=Integer.parseInt(jtf1.getText())*Integer.parseInt(jtf2.getText());
 		});
+		
+		
+		
+		
+		FocusListener listener1=new FocusListener() {//nombre de la interface no la clase porque no tiene nomber
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				//cuando la caja pierda el foco, comprueba si el valor introducido es texto 
+				//en cuyo caso, debe mantener ek foco en la caja.
+				JTextField jtf=(JTextField)e.getSource();//obtiene una referencia a la caja.
+												//en la que se ha producido el evento.
+			if(jtf.getText().isEmpty()) {
+				jtf.setText("0");
+			return;
+			}
+				try {
+					Integer.parseInt(jtf.getText());
+				}catch(NumberFormatException ex) {
+					JOptionPane.showConfirmDialog(JCalculadora.this,"Debe escribir texto un núemero!");
+					jtf.requestFocus();//para que mantenga el foco en la caja
+					jtf.selectAll();  // selecciona el texto introducido.
+				}
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				
+				
+			}
+		};
+		//asociamos el listener a las dos cajas
+		jtf1.addFocusListener(listener1);
+		jtf2.addFocusListener(listener1);
 		
 	}
 	
