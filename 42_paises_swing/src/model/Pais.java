@@ -5,10 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @NoArgsConstructor
-@Data
 @AllArgsConstructor
+@Data
 public class Pais {
 	@SerializedName("name")
 	private String nombre;
@@ -17,5 +16,4 @@ public class Pais {
 	private String capital;
 	@SerializedName("population")
 	private long poblacion;
-
 }

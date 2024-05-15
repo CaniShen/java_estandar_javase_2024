@@ -1,13 +1,11 @@
 package service;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.http.HttpResponse.BodyHandler;
+
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -18,9 +16,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
-
 
 import model.Pais;
 
@@ -32,15 +27,15 @@ sobre paises. Cada pais se caracteriza por: nombre,continente,capital,habitantes
 -Pais más poblado
 -Tabla con paises agurpados por continente
 -Pais a partir de su capital */
-public class PaisesService {
-	private  Stream<Pais> getPais() {
+public class PaisesServiceImpl implements PaisesService {
+	private  Stream<Pais> getStreamPaises() {
 		Gson gson=new Gson();
 		String url="https://restcountries.com/v2/all";
 		//creamos objeto request que configura la petición
 		HttpRequest request=HttpRequest.newBuilder()
-					.uri(URI.create(url))
-					.GET()
-					.build();
+				.uri(URI.create(url))
+				.GET()
+				.build();
 		//creamos objeto client para hacer la llamada
 		HttpClient client=HttpClient.newBuilder()
 					.build();
@@ -55,32 +50,37 @@ public class PaisesService {
 		
 	}
 	//-Lista de continentes
-	public List<String> listaContinente() {
-		return getPais() //Stream<Pais>
+	@Override
+	public List<String> getContinentes() {
+		return getStreamPaises() //Stream<Pais>
 				.map(c->c.getContinente()) //Stream<String>
 				.distinct()
 				.toList();
 				
 	}
 	//-Lista de paises a partir del continente
-	public List<Pais> listaPaises(String continente) {
-		return getPais() //Stream<Pais>
+	@Override
+	public List<Pais> getPaisesFiltradosPor(String continente) {
+		return getStreamPaises() //Stream<Pais>
 				.filter(p->p.getContinente().equalsIgnoreCase(continente))//Stream<Pais>?????????????
 				.toList();
 	}
 	//-Pais más poblado
-	public  Optional<Pais> paisMasPoblado() {
-		return getPais()//Stream<Pais>
-				.max(Comparator.comparingLong(p-> p.getPoblacion()));
+	@Override
+	public  Optional<Pais> getPaisMasPoblado() {
+		return getStreamPaises()//Stream<Pais>
+				.max(Comparator.comparingLong(p->p.getPoblacion()));
 	}
 	//-Tabla con paises agurpados por continente
+	@Override
 	public  Map<String, List<Pais>> getTablaPaisContinente()  {
-		return getPais()
+		return getStreamPaises()
 				.collect(Collectors.groupingBy(p->p.getContinente()));
 	}
 	//-Pais a partir de su capital */
+	@Override
 	public String getPaisFiltradoPor(String capital)  {
-		return getPais()
+		return getStreamPaises()
 				.filter(p->p.getCapital() !=null&&p.getCapital().equals(capital))
 				.findFirst()//Optional<Pais>
 				.map(p->p.getNombre())//Optional<String>

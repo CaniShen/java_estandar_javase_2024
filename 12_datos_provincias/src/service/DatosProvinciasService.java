@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 
 import com.google.gson.Gson;
 
+import model.JsonMunicipio;
+import model.JsonProvincia;
 import model.Municipio;
 import model.Provincia;
 
