@@ -16,4 +16,8 @@ public class Municipio {
 	private String nombreProvincia;
 	@SerializedName("POBLACION_CAPITAL")
 	private String poblacion;
+	@SerializedName("ALTITUD")
+	private int altitud;
+	@SerializedName("SUPERFICIE")
+	private Double superficie;
 }

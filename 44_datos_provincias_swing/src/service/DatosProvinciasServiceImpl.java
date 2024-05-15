@@ -67,9 +67,8 @@ public class DatosProvinciasServiceImpl implements DatosProvinciasService {
 				.distinct()
 				.toList();
 	}
-	
 	@Override
-	public List<Provincia> provinciasComunidad(String comunidad){
+	public List<Provincia> provinciasFiltradosPor(String comunidad) {
 		return getStreamProvincias()
 				.filter(p->p.getComunidadAutonoma().equals(comunidad))
 				.toList();
@@ -85,6 +84,14 @@ public class DatosProvinciasServiceImpl implements DatosProvinciasService {
 		return getStreamProvincias()
 				.filter(p->p.getComunidadAutonoma().equals(comunidad))
 				.flatMap(p -> getStreamMunicipiosProvincia(p.getCodigoProvincia()))
+				.toList();
+	}
+	@Override
+	public List<Municipio> municipiosFiltradosPor(String provincia) {
+		// TODO Auto-generated method stub
+		return getStreamProvincias()
+				.filter(p->p.getNombreProvincia().equals(provincia))
+				.flatMap(p->getStreamMunicipiosProvincia(p.getCodigoProvincia()))
 				.toList();
 	}
 }

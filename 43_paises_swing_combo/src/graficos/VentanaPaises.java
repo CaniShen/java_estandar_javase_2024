@@ -25,6 +25,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaPaises extends JFrame {
 
@@ -70,6 +72,10 @@ public class VentanaPaises extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		JComboBox<String> comboContinentes = new JComboBox<>();
+		comboContinentes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		comboContinentes.addItemListener( new ItemListener() {
 			public void itemStateChanged(ItemEvent e)  {
 				if(e.getStateChange()== ItemEvent.SELECTED) {
