@@ -94,23 +94,29 @@ public class VentanaRegistrar extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String mensaje;
-				Cliente cliente=new Cliente();
-				cliente.setUsuario(jtfUsuario.getText());
-				cliente.setPassword(jtfContrasenia.getText());
-				cliente.setTelefono(jtfTelefono.getText().isEmpty() ? 0: Integer.parseInt(jtfTelefono.getText()));
-				cliente.setEmail(jtfEmail.getText());
-				
 				ClientesService service=ClientesServiceFactory.getClientesService();
+				Cliente cliente=new Cliente(0,
+						jtfUsuario.getText(),
+						jtfContrasenia.getText(),
+						jtfEmail.getText(),
+						Integer.parseInt(jtfTelefono.getText()));
+//				/*cliente.setUsuario(jtfUsuario.getText());
+//				cliente.setPassword(jtfContrasenia.getText());
+//				cliente.setTelefono(jtfTelefono.getText().isEmpty() ? 0: Integer.parseInt(jtfTelefono.getText()));
+//				cliente.setEmail(jtfEmail.getText());*/
+//				
+				
 				if(service.registrar(cliente)) {
 					mensaje="Registrado!";
 				}else {
 					mensaje="Usuario ya existente!";
 				}
 				JOptionPane.showMessageDialog(VentanaRegistrar.this, mensaje);
-				
+				VentanaRegistrar.this.dispose();
 			}
 		});
 		btnNewButton.setBounds(242, 197, 127, 23);
 		contentPane.add(btnNewButton);
+		//this.setVisible(true);
 	}
 }
