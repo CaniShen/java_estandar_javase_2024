@@ -24,13 +24,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 
-public class VentanaProvincias extends JFrame {
+public class VentanaDatos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
-	private JComboBox comboProvincia;
-	private JList lista;
 	private JTable table_1;
 
 	/**
@@ -40,7 +37,7 @@ public class VentanaProvincias extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaProvincias frame = new VentanaProvincias();
+					VentanaDatos frame = new VentanaDatos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +49,7 @@ public class VentanaProvincias extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaProvincias() {
+	public VentanaDatos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 736, 471);
 		contentPane = new JPanel();
@@ -73,11 +70,10 @@ public class VentanaProvincias extends JFrame {
 		lblNewLabel_1.setBounds(38, 141, 84, 14);
 		contentPane.add(lblNewLabel_1);
 
-		lista = new JList();
 		JComboBox<String> comboComunidades = new JComboBox<>();
 		comboComunidades.setBounds(264, 30, 133, 22);
 		contentPane.add(comboComunidades);
-		comboComunidades.setModel(new ComboBoxModelComunidadesImpl());
+		comboComunidades.setModel(new ComboBoxModelComunidadesImpl());//
 
 		JComboBox<String> comboProvincias = new JComboBox<>();
 		comboProvincias.setBounds(264, 103, 133, 22);
@@ -90,8 +86,8 @@ public class VentanaProvincias extends JFrame {
 		table_1 = new JTable();
 		scrollPane.setViewportView(table_1);
 		
-		comboComunidades.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+		comboComunidades.addItemListener(new ItemListener() {//添加监听的方法，然后添加监听物品
+			public void itemStateChanged(ItemEvent e) {//当用户选择不同的项时，将触发 itemStateChanged() 方法，并根据选择的状态执行相应的操作。
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					String seleccionado = (String) comboComunidades.getSelectedItem();
 

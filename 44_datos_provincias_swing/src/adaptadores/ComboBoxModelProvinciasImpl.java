@@ -13,7 +13,7 @@ public class ComboBoxModelProvinciasImpl extends  DefaultComboBoxModel <String> 
 		public ComboBoxModelProvinciasImpl(String comunidad) {
 			var provinciasService=DatosProvinciasServiceFactory.getDatosProvinciasService();
 			provincias=provinciasService.provinciasFiltradosPor(comunidad).stream().map(a->a.getNombreProvincia()).toList();
-			
+			//provincias=provinciasService.provinciasFiltradosPor(comunidad);
 		}
 		@Override
 		public int getSize() {
