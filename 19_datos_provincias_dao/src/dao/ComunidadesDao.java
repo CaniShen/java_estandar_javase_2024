@@ -10,9 +10,5 @@ public interface ComunidadesDao {
 	
 	//Comunidad findByComunidad(String codigo); 
 	boolean existComunidad(String codigo);
-	
-	static ComunidadesDao of() {
-		return new ComunidadesDaoImpl();
-	}
 
 }

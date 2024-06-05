@@ -1,10 +1,5 @@
 package service;
 
-import dao.ComunidadesDao;
-import dao.ComunidadesDaoImpl;
-import dao.MunicipiosDao;
-import dao.ProvinciasDao;
-import dao.ProvinciasDaoImpl;
 
 public class ComunidadesServiceFactory {
 	public static ComunidadesService getComunidadesService() {

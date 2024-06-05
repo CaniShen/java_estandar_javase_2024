@@ -15,7 +15,7 @@ public class DeserializadorFecha implements JsonDeserializer<LocalDate> {
 	@Override
 	public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
-		// TODO Auto-generated method stub
+
 		return  LocalDate.parse(json.getAsString()); //convertimos el String en LocalDate, usando formato ISO;
 	}
 

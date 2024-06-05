@@ -10,9 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Pedido {
+	
 	private int idPedido;
 	private String producto;
 	private String tienda;
+	
 	private LocalDate fechaPedido;
 	private double precio;
 }

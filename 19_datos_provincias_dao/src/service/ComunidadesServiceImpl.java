@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import dao.ComunidadesDao;
+import dao.ComunidadesDaoFactory;
 import dao.MunicipiosDao;
 import dao.ProvinciasDao;
 import model.Comunidad;
@@ -16,9 +17,9 @@ public class ComunidadesServiceImpl implements ComunidadesService {
 	ProvinciasDao provinciasDao;
 
 	public ComunidadesServiceImpl() {// crear el constructor
-		comunidadesDao = ComunidadesDao.of();
-		municipiosDao = MunicipiosDao.of();
-		provinciasDao = ProvinciasDao.of();
+		comunidadesDao=ComunidadesDaoFactory.getComunidadesDao();
+		provinciasDao=ComunidadesDaoFactory.getProvinciasDao();
+		municipiosDao=ComunidadesDaoFactory.getMunicipiosDao();
 		
 	/*comunidadesDao=ComunidadesDaoFactory.ge*/
 

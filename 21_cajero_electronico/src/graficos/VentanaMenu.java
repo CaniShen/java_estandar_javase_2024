@@ -1,20 +1,21 @@
 package graficos;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Cuenta;
 import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 public class VentanaMenu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	Cuenta cuenta;
 	/**
 	 * Launch the application.
 	 */
@@ -34,42 +35,33 @@ public class VentanaMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaMenu() {
+	public VentanaMenu(Cuenta cuenta) {
+		this.cuenta=cuenta;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("File");
+		JMenu mnNewMenu = new JMenu("Operaciones");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Guardar");
+		JMenuBar menuBar_1 =new JMenuBar();
+		mnNewMenu.add(null)
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("TITULARES");
 		mnNewMenu.add(mntmNewMenuItem);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Salir");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VentanaMenu.this.dispose();
-			}
-		});
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("INGRESO");
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
-		JMenu mnNewMenu_1 = new JMenu("Editar");
-		menuBar.add(mnNewMenu_1);
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("EXTRACCION");
+		mnNewMenu.add(mntmNewMenuItem_2);
 		
-		JMenu mnNewMenu_2 = new JMenu("Opciones");
-		mnNewMenu_1.add(mnNewMenu_2);
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("TRANSFERENCIA");
+		mnNewMenu.add(mntmNewMenuItem_3);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Cortar");
-		mnNewMenu_2.add(mntmNewMenuItem_2);
-		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Pegar");
-		mnNewMenu_2.add(mntmNewMenuItem_3);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("SALDO Y MOVIMIENTO");
+		mnNewMenu.add(mntmNewMenuItem_4);
 	}
 }
